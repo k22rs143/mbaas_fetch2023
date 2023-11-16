@@ -50,7 +50,7 @@
                 for(var i=0;i<results.length;i++){
                 var data=results[i].get("text");
                 var update=results[i].get("updateDate");
-                msg+=data+":"+update;
+                msg+=data+":"+update+"<br>";
                 }
                 $("#message").html(msg);
             })

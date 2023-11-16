@@ -42,6 +42,20 @@
             })
         }
 
+        function fetchAll(){
+            var TestClass=ncmb.DataStore("FetchTest");
+            TestClass.fetchAll()
+            .then(function(results){
+                var msg="";
+                for(var i=0;i<results.length;i++){
+                var data=results[i].get("text");
+                var update=results[i].get("updateDate");
+                msg+=data+":"+update;
+                }
+                $("#message").html(msg);
+            })
+        }
+
     </script>
 </head>
 
@@ -58,7 +72,6 @@
         <button id="btnC" class="btn" onclick="fetchAll()">Fetch All</button>
     </div>
    
-
     <div id="message">message area</div>
 </body>
 

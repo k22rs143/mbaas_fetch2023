@@ -19,9 +19,11 @@
             // 登録するレコードを用意
             let testRecord = new TestClass();
             let key = "text";
+            let key2= "types";
             let value = $("#value").val();
             // レコードのフィールドと値を設定
             testRecord.set(key, value);
+            testRecord.set(key2, value);
             // レコードをデータベースに登録
             testRecord.save()
                 .then(function(m) {
@@ -37,8 +39,9 @@
             TestClass.fetch()
             .then(function(results){
                 var data=results.get("text");
-                var update=results.get("updateDate");
-                $("#message").html(data+":"+update);
+                var tdata=results.get("types");
+                //var update=results.get("updateDate");
+                $("#message").html(data+":"+tdata);
             })
         }
 
@@ -46,12 +49,14 @@
             var TestClass=ncmb.DataStore("FetchTest");
             TestClass.fetchAll()
             .then(function(results){
-                var msg="";
+                var msg="<table><tr><th>message</th><th>types</th></tr>";
                 for(var i=0;i<results.length;i++){
                 var data=results[i].get("text");
-                var update=results[i].get("updateDate");
-                msg+=data+":"+update+"<br>";
+                var tdata=results[i].get("types");
+                //var update=results[i].get("updateDate");
+                msg+="<tr><td>"+data+"</td><td>"+tdata+"</td></tr>";
                 }
+                msg+="</table>"
                 $("#message").html(msg);
             })
         }
@@ -59,17 +64,22 @@
     </script>
 </head>
 
+
 <body>
     <h1>mBaaS fetch</h1>
     <div>
-        <label for="value">Value:</label>
-        <input id="value" type="text" value="Hello, mBaaS!">
+        <label for="value">Animals:</label>
+        <input id="value" type="text" value="Enter Name">
+        <label for="types">Types:</label>
+        <input id="types" type="number">
     </div>
 
     <div id="button">
         <button id="btnA" class="btn" onclick="register()">Register</button>
         <button id="btnB" class="btn" onclick="fetch()">Fetch</button>
         <button id="btnC" class="btn" onclick="fetchAll()">Fetch All</button>
+        <button id="btnD" class="btn" onclick="delete()">Delete</button>
+        
     </div>
    
     <div id="message">message area</div>

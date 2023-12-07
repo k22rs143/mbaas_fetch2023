@@ -61,6 +61,19 @@
             })
         }
 
+        function deleteData(){
+            UTdate.fetch()
+            .then(function(results){
+                return results.delete();
+            })
+            .then(function(results){
+                
+            })
+            .catch(function(error){
+                console.log("error");
+            })
+        }
+
     </script>
 </head>
 
@@ -78,7 +91,7 @@
         <button id="btnA" class="btn" onclick="register()">Register</button>
         <button id="btnB" class="btn" onclick="fetch()">Fetch</button>
         <button id="btnC" class="btn" onclick="fetchAll()">Fetch All</button>
-        <button id="btnD" class="btn" onclick="delete()">Delete</button>
+        <button id="btnD" class="btn" onclick="deleteData()">Delete</button>
         
     </div>
    

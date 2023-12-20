@@ -39,8 +39,8 @@
             var TestClass=ncmb.DataStore("FetchTest");
             TestClass.fetch()
             .then(function(results){
-                var data=results.get("user");
-                var pdata=results.get("pass");
+                var data=results.get("User");
+                var pdata=results.get("Pass");
                 var update=results.get("updateDate");
                 $("#message").html(data+":"+pdata);
             })
@@ -63,7 +63,7 @@
         }
 
         function deleteData(){
-            UTdate.fetch()
+            UTdata.fetch()
             .then(function(results){
                 return results.delete();
             })
@@ -84,7 +84,7 @@
 
 
 <body>
-    <h1>mBaaS fetch</h1>
+    <h1>Login</h1>
     <div>
         <label for="user">UserName:</label><br>
         <input id="user" type="text" value="Enter UserName"><br>

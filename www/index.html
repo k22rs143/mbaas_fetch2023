@@ -18,12 +18,13 @@
         function register() {
             // 登録するレコードを用意
             let testRecord = new TestClass();
-            let key = "text";
-            let key2= "types";
-            let value = $("#value").val();
+            let key = "User";
+            let key2= "Pass";
+            let value = $("#user").val();
+            let value2=$("#pass").val();
             // レコードのフィールドと値を設定
             testRecord.set(key, value);
-            testRecord.set(key2, value);
+            testRecord.set(key2, value2);
             // レコードをデータベースに登録
             testRecord.save()
                 .then(function(m) {
@@ -38,10 +39,10 @@
             var TestClass=ncmb.DataStore("FetchTest");
             TestClass.fetch()
             .then(function(results){
-                var data=results.get("text");
-                var tdata=results.get("types");
-                //var update=results.get("updateDate");
-                $("#message").html(data+":"+tdata);
+                var data=results.get("user");
+                var pdata=results.get("pass");
+                var update=results.get("updateDate");
+                $("#message").html(data+":"+pdata);
             })
         }
 
@@ -49,12 +50,12 @@
             var TestClass=ncmb.DataStore("FetchTest");
             TestClass.fetchAll()
             .then(function(results){
-                var msg="<table><tr><th>message</th><th>types</th></tr>";
+                var msg="<table><tr><th>UserName</th><th>Password</th></tr>";
                 for(var i=0;i<results.length;i++){
-                var data=results[i].get("text");
-                var tdata=results[i].get("types");
-                //var update=results[i].get("updateDate");
-                msg+="<tr><td>"+data+"</td><td>"+tdata+"</td></tr>";
+                var data=results[i].get("User");
+                var pdata=results[i].get("Pass");
+                var update=results[i].get("updateDate");
+                msg+="<tr><td>"+data+"</td><td>"+pdata+"</td></tr>";
                 }
                 msg+="</table>"
                 $("#message").html(msg);
@@ -67,10 +68,14 @@
                 return results.delete();
             })
             .then(function(results){
-                
+                $("#display").removeClass();
+                $("#display").addClass("bg-success");
+                $("#display").html("delete success");
             })
             .catch(function(error){
-                console.log("error");
+                $("#display").removeClass();
+                $("#display").addClass("bg-warning");
+                $("#display").html("delete fail"+JSON.stringify(error));
             })
         }
 
@@ -81,10 +86,10 @@
 <body>
     <h1>mBaaS fetch</h1>
     <div>
-        <label for="value">Animals:</label>
-        <input id="value" type="text" value="Enter Name">
-        <label for="types">Types:</label>
-        <input id="types" type="number">
+        <label for="user">UserName:</label><br>
+        <input id="user" type="text" value="Enter UserName"><br>
+        <label for="pass">Password:</label><br>
+        <input id="pass" type="text" value="Enter Password">
     </div>
 
     <div id="button">
@@ -92,7 +97,6 @@
         <button id="btnB" class="btn" onclick="fetch()">Fetch</button>
         <button id="btnC" class="btn" onclick="fetchAll()">Fetch All</button>
         <button id="btnD" class="btn" onclick="deleteData()">Delete</button>
-        
     </div>
    
     <div id="message">message area</div>

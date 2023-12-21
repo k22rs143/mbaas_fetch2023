@@ -63,7 +63,8 @@
         }
 
         function deleteData(){
-            UTdata.fetch()
+            let user=$("#user").val();
+            TestClass.equalTo("User",user).fetch()
             .then(function(results){
                 return results.delete();
             })
@@ -89,14 +90,14 @@
         <label for="user">UserName:</label><br>
         <input id="user" type="text" value="Enter UserName"><br>
         <label for="pass">Password:</label><br>
-        <input id="pass" type="text" value="Enter Password">
+        <input id="pass" type="password" value="Enter Password">
     </div>
 
     <div id="button">
-        <button id="btnA" class="btn" onclick="register()">Register</button>
+        <button id="btnA" class="btn" onclick="register()">Login</button><br>
         <button id="btnB" class="btn" onclick="fetch()">Fetch</button>
         <button id="btnC" class="btn" onclick="fetchAll()">Fetch All</button>
-        <button id="btnD" class="btn" onclick="deleteData()">Delete</button>
+        <button id="btnD" class="btn" onclick="deleteData()">Logout</button>
     </div>
    
     <div id="message">message area</div>
